@@ -14,6 +14,7 @@ class PublicController extends Controller
     }
 
     public function post(Post $post){
+        $post->load(['comments.user', 'user']);
         return view('post', compact('post'));
     }
 

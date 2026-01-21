@@ -9,12 +9,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PublicController extends Controller
 {
     public function index(){
-        $posts = Post::all();
-        $posts = Post::simplePaginate(16);
+        $posts = Post::with('user')->withCount('comments')->latest()->simplePaginate(16);
         return view('welcome', compact('posts'));
     }
 
     public function post(Post $post){
         return view('post', compact('post'));
+    }
+
+    public function secure(){
+        return view('secure');
     }
 }

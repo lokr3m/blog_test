@@ -8,13 +8,17 @@
                 @csrf
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Title</legend>
-                    <input name="title" type="text" class="input w-full" placeholder="Title" />
-                    {{-- <p class="label">Optional</p> --}}
+                    <input value="{{ old('title') }}" name="title" type="text" class="input w-full @error('title') input-error @enderror" placeholder="Title" />
+                    @error('title')
+                        <p class="label text-error">{{ $message }}</p>
+                    @enderror
                 </fieldset>
                 <fieldset class="fieldset">
-                    <legend class="fieldset-legend">Your bio</legend>
-                    <textarea name="body" class="textarea h-48 w-full" placeholder="Bio"></textarea>
-                    {{-- <div class="label">Optional</div> --}}
+                    <legend class="fieldset-legend">Content</legend>
+                    <textarea name="body" class="textarea h-48 w-full @error('body') textarea-error @enderror" placeholder="Write something cool...">{{ old('body') }}</textarea>
+                     @error('body')
+                        <p class="label text-error">{{ $message }}</p>
+                    @enderror
                 </fieldset>
                 <button class="btn btn-primary">Create</button>
             </form>

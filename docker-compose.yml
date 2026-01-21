@@ -6,8 +6,13 @@ services:
       MARIADB_ROOT_PASSWORD: example
       MARIADB_DATABASE: 'blog'
     volumes:
-      - ta23bblogdbdata:/var/lib/mysql
+      - ta23bblogdata:/var/lib/mysql
     ports:
       - 33061:3306
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
 volumes:
-  ta23bblogdbdata:
+  ta23bblogdata:

@@ -29,7 +29,16 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $validated = $request->validated();
+        
+        $comment = Comment::create([
+            'body' => $validated['body'],
+            'post_id' => $validated['post_id'],
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect()->route('post', $comment->post_id)
+            ->with('success', 'Comment added successfully!');
     }
 
     /**

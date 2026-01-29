@@ -13,9 +13,23 @@
         @else
             <p>{{ $post->snippet }}</p>
         @endif
-        <div class="text-base-content/70">{{ $post->user->name }}</div>
+        <div class="text-base-content/70">
+            <a href="{{route('user', $post->user)}}">{{ $post->user->name }}</a>
+        </div>
         <div class="text-base-content/70"><b>Comments: </b>{{ $post->comments_count }}</div>
+        <div class="text-base-content/70"><b>Likes: </b>{{ $post->likes_count }}</div>
+        <div>
+            @foreach($post->tags as $tag)
+                <div class="badge badge-soft badge-primary mb-1">{{$tag->name}}</div>
+            @endforeach
+        </div>
         <div class="card-actions justify-end">
+            @if($post->authHasLiked)
+                <a href="{{ route('post.like', $post) }}" class="btn btn-error">Unlike</a>
+            @else
+                <a href="{{ route('post.like', $post) }}" class="btn btn-secondary">Like</a>
+            @endif
+
             @unless($full)
                 <a href="{{ route('post', $post) }}" class="btn btn-primary">Read more</a>
             @endunless

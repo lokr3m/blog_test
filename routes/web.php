@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/post/{post}', [PublicController::class, 'post'])->name('post');
+Route::get('/user/{user}', [PublicController::class, 'user'])->name('user');
 
 Route::post('/comments', [CommentController::class, 'store'])->middleware(['auth', 'verified'])->name('comments.store');
 
@@ -29,6 +30,8 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/admin/posts', PostController::class);
+
+    Route::get('/post/{post}/like', [PublicController::class, 'like'])->name('post.like');
 
     Route::get('/secure', [PublicController::class, 'secure'])->middleware('password.confirm')->name('secure');
 

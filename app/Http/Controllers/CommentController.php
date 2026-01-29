@@ -37,7 +37,7 @@ class CommentController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('post', $comment->post)
+        return redirect()->route('post', $comment->post_id)
             ->with('success', 'Comment added successfully!');
     }
 
